@@ -10,7 +10,7 @@
 	<?php 
 	$numero_tareas = 10;
 	for ($i = 0; $i < $numero_tareas; $i++) {
-		echo("<p>Tarea número: $i</p>");
+		echo("");
 	}
 	?>
 </body>
