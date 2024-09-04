@@ -1,12 +1,27 @@
 <?php 
+
+$lista_tareas = array();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$titulo = $_POST['titulo'];
 	$fecha = $_POST['fecha'];
 	$nota = $_POST['nota'];
 	
-	echo "Título: " . htmlspecialchars($titulo) . "<br>";
-    echo "Fecha: " . htmlspecialchars($fecha) . "<br>";
-    echo "Nota: " . nl2br(htmlspecialchars($nota));
+	$fila = "
+	<tr>
+		<td>$titulo</td>
+		<td>$nota</td>
+		<td>$fecha</td>
+		<td>
+			<label for='checked'>
+			Estado
+			<input type='checkbox' value='tareaCheck' name='check' id='checked'/>
+			</label>
+		</td>
+	</tr>
+	";
+	
+	echo $fila;
     exit;
 }
 
@@ -66,8 +81,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </div>
         </div>
-        
-        <div id="resultado"></div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
@@ -87,7 +100,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 					type: 'POST',
 					data: $(this).serialize(),
 					success: function(response) {
-						$("#resultado").html(response);
+						// Agrega la nieva fila a la tabla
+						$("table tbody").append(response);
+						
+						// Limpia el formulario
+						$("#formulario")[0].reset();
 					},
 					error: function(xhr, status, error) {
 						console.log("Ocurrio un error => " + error);
