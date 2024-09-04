@@ -1,3 +1,17 @@
+<?php 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+	$titulo = $_POST['titulo'];
+	$fecha = $_POST['fecha'];
+	$nota = $_POST['nota'];
+	
+	echo "Título: " . htmlspecialchars($titulo) . "<br>";
+    echo "Fecha: " . htmlspecialchars($fecha) . "<br>";
+    echo "Nota: " . nl2br(htmlspecialchars($nota));
+    exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,11 +36,17 @@
                         </tr>
                     </thead>
                     <tbody>
+						<tr>
+							<td>Título 1</td>
+							<td>Nota 1</td>
+							<td>Fecha 1</td>
+							<td>Estado 1</td>
+						</tr>
                     </tbody>
                 </table>
                 <a href="#agregar" data-bs-toggle="collapse" class="btn btn-outline-primary">Agregar</a>
                 <div id="agregar" class="collapse">
-                    <form action="" class="form">
+                    <form action="index.php" class="form" id="formulario" method="POST" target="_self" autocomplete="on">
                         <div class="row">
                             <div class="col">
                                 <label for="titulo" class="form-label">Titulo</label>
@@ -46,8 +66,35 @@
                 </div>
             </div>
         </div>
+        
+        <div id="resultado"></div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+		$(document).ready(() => {
+			console.log('Se cargo el archivo');
+			$("#formulario").on("submit", function(event) {
+				// Evita que la pagina se recargue automáticamente
+				event.preventDefault();
+				
+				console.log('entro en submit');
+				
+				$.ajax({
+					url: 'index.php',
+					type: 'POST',
+					data: $(this).serialize(),
+					success: function(response) {
+						$("#resultado").html(response);
+					},
+					error: function(xhr, status, error) {
+						console.log("Ocurrio un error => " + error);
+					}
+				});
+			});
+		});
+    </script>
 </body>
 </html>
