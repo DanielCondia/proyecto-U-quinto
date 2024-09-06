@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		<td>
 			<label for='checked'>
 			Estado
-			<input type='checkbox' value='tareaCheck' name='check' id='checked'/>
+			<input type='checkbox' class='form-check-input' value='tareaCheck' name='check' id='checked'/>
 			</label>
 		</td>
 	</tr>
@@ -33,14 +33,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
     <title>Lista de Tareas</title>
 </head>
 <body>
+        <nav class="navbar nabvar-expand-lg navabr-dark bg-primary">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="/trabajo_1/inicio.php" class="nav-link">Inicio</a>
+                </li>
+            </ul>
+        </nav>
     <div class="container">
         <div class="row">
-            <div class="col">
-                <button type="submit" class="btn btn-outline-primary" id="filtrar" name="filtrar" style="margin-bottom: 1rem;">Filtrar</button>
+            <h1>TUS NOTAS</h1>
+            <div class="col" style="margin-top: 3rem;">
+                  <button type="submit" class="btn btn-outline-primary" id="filtrar" name="filtrar" style="margin-bottom: 1rem;" data-bs-toggle="modal" data-bs-target="#dialogo1">Filtrar</button>
+                <div class="modal fade" id="dialogo1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">FILTROS</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="" class="form mb-3" id="formulario_filtros">
+                                    <label for="text" class="form-label">Por titulo</label>
+                                    <input type="text" class="form-control" id="filtro_titulo">
+
+                                    <label for="date" class="form-label">Por fecha</label>
+                                    <input type="date" class="form-control" id="filtro_fecha"> 
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <table class="table table-dark table-striped" style="margin-bottom: 1rem;">
                     <thead>
                         <tr>
