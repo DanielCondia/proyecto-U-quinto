@@ -3,9 +3,9 @@
 $lista_tareas = array();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	$titulo = $_POST['titulo'];
-	$fecha = $_POST['fecha'];
-	$nota = $_POST['nota'];
+	$titulo = htmlspecialchars($_POST['titulo']);
+	$fecha = htmlspecialchars($_POST['fecha']);
+	$nota = htmlspecialchars($_POST['nota']);
 	
 	$fila = "
 	<tr>
