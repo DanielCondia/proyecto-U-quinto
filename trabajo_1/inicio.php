@@ -13,14 +13,14 @@
     <div class="row"
          style="background-image: url(https://e0.pxfuel.com/wallpapers/824/944/desktop-wallpaper-customer-centric-enterprise-work-project-management-solution-project-manager.jpg); background-repeat: no-repeat; background-position: center; background-size:cover; height: 100vh; width: 100vw;">
         <div class="col-6" id="titulos">
-            <h1 style="color= #fffffff;">SGT</h1>
+            <h1>SGT</h1>
             <h3>Gestiona tus tareas con facilidad</h3>
         </div>
     </div>
 </div>
 <div class="container">
     <div class="col">
-        <h2 style="text-align = center;">DE QUE TRATA?</h2>
+        <h2>DE QUE TRATA?</h2>
         <p>somos una pagina que te ayudara en la organizacion de tus tareas puedes agregar
             cuantas quieras y darle un plazo de cumpliento con el titulo que quieras y con una nota en la que agregaras
             de que tratara la tarea que estas creando despues el sistema se encaragra de reportarte cunado

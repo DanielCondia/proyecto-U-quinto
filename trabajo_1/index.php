@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	echo $fila;
     exit;
 }
-
+ 
 ?>
 
 <!DOCTYPE html>
@@ -40,36 +40,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
         <nav class="navbar nabvar-expand-lg navabr-dark bg-primary">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a href="/trabajo_1/inicio.php" class="nav-link">Inicio</a>
+                <li class="nav-item" style="margin-left: 1rem">
+                    <a class="nav-link" id="inicio">Inicio</a>
                 </li>
             </ul>
         </nav>
     <div class="container">
         <div class="row">
-            <h1>TUS NOTAS</h1>
+            <h1 style="text-align: center; margin-top: 2rem">TUS NOTAS</h1>
             <div class="col" style="margin-top: 3rem;">
-                  <button type="submit" class="btn btn-outline-primary" id="filtrar" name="filtrar" style="margin-bottom: 1rem;" data-bs-toggle="modal" data-bs-target="#dialogo1">Filtrar</button>
-                <div class="modal fade" id="dialogo1">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">FILTROS</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="" class="form mb-3" id="formulario_filtros">
-                                    <label for="text" class="form-label">Por titulo</label>
-                                    <input type="text" class="form-control" id="filtro_titulo">
-
-                                    <label for="date" class="form-label">Por fecha</label>
-                                    <input type="date" class="form-control" id="filtro_fecha"> 
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                <div class="input-group"> 
+                    <input id="entradafilter" type="text" class="form-control" placeholder="FILTRAR">
                 </div>
-                <table class="table table-dark table-striped" style="margin-bottom: 1rem;">
+                <table class="table table-dark table-striped" style="margin-bottom: 1rem; margin-top: 1rem">
                     <thead>
                         <tr>
                             <th>Titulo</th>
@@ -78,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <th>Estado</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="contenidobusqueda">
 						<tr>
 							<td>Título 1</td>
 							<td>Nota 1</td>
@@ -114,6 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <script>
 		$(document).ready(() => {
 			console.log('Se cargo el archivo');
@@ -140,6 +124,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				});
 			});
 		});
+
+        const ini = document.getElementById("inicio");
+        ini.addEventListener('click', () =>{
+            window.location.href = "inicio.php"
+        })
+
+        $(document).ready(function () {
+        $('#entradafilter').keyup(function () {
+        var rex = new RegExp($(this).val(), 'i');
+        $('.contenidobusqueda tr').hide();
+        $('.contenidobusqueda tr').filter(function () {
+            return rex.test($(this).text());
+        }).show();
+
+        })
+
+});
     </script>
 </body>
 </html>
