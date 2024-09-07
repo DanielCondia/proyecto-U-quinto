@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h1 style="text-align: center; margin-top: 2rem">TUS NOTAS</h1>
             <div class="col" style="margin-top: 3rem;">
                 <div class="input-group"> 
-                    <input id="entradafilter" type="text" class="form-control" placeholder="FILTRAR">
+                    <input id="entradafilter" type="text" class="form-control" placeholder="FILTRAR" data-bs-toggle="mensaje" title="aca podras filtrar tus notas ya sea con el titulo o con la fecha">
                 </div>
                 <table class="table table-dark table-striped" style="margin-bottom: 1rem; margin-top: 1rem">
                     <thead>
@@ -70,13 +70,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 						</tr>
                     </tbody>
                 </table>
-                <a href="#agregar" data-bs-toggle="collapse" class="btn btn-outline-primary">Agregar</a>
+                <a href="#agregar" data-bs-toggle="collapse" class="btn btn-outline-primary" data-bs-toggle="mensaje" title="se desplegara un formulario para agregar tu nota">Agregar</a>
                 <div id="agregar" class="collapse">
                     <form action="index.php" class="form" id="formulario" method="POST" target="_self" autocomplete="on">
                         <div class="row">
                             <div class="col">
                                 <label for="titulo" class="form-label">Titulo</label>
-                                <input type="text" class="form-control" name="titulo" id="titulo">
+                                <input type="text" class="form-control" name="titulo" id="titulo"  data-bs-toggle="mensaje" title="coloca un titulo corto con eso te sera mas facil buscar la nota despues">
                             </div>
                             <div class="col">
                                 <label for="date" class="form-label">Fecha</label>
@@ -99,6 +99,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <script>
+        //funcion tooltip para mostrar el mensaje con el cursor
+        var = tooltiipTrigerList =[].slice.call(document.queryselector('[data-bs-toggle="mensaje"]'));
+        var = tooltiplist = tooltiipTrigerList.map (function(tooltiipTrigerEl){
+            return new bootstrap.Tooltip(tooltiipTrigerEl)
+        });
+
 		$(document).ready(() => {
 			console.log('Se cargo el archivo');
 			$("#formulario").on("submit", function(event) {
@@ -130,6 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             window.location.href = "inicio.php"
         })
 
+        //funcion para filtrar datos 
         $(document).ready(function () {
         $('#entradafilter').keyup(function () {
         var rex = new RegExp($(this).val(), 'i');
