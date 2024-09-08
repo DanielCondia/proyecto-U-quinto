@@ -1,17 +1,20 @@
 <?php 
-
+//funcion para validar los datos y agregarlos a la tabla
 $lista_tareas = array();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 	$titulo = htmlspecialchars($_POST['titulo']);
 	$fecha = htmlspecialchars($_POST['fecha']);
-	$nota = htmlspecialchars($_POST['nota']);
+	$categoria = htmlspecialchars($_POST['categoria']);
+    $nota = htmlspecialchars($_POST['nota']);
+
 	
 	$fila = "
 	<tr>
 		<td>$titulo</td>
 		<td>$nota</td>
+        <td>$categoria</td>
 		<td>$fecha</td>
 		<td>
 			<label for='checked'>
@@ -19,6 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			<input type='checkbox' class='form-check-input' value='tareaCheck' name='check' id='checked'/>
 			</label>
 		</td>
+        <td>
+            <button type='button' class='btn btn-primary' id='eliminar'>
+                <span class='glyphicon glyphicon-remove-sign'></span
+            </button>
+        </td>
 	</tr>
 	";
 
@@ -57,16 +65,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <tr>
                             <th>Titulo</th>
                             <th>Nota</th>
+                            <th>Categoria</th>
                             <th>Fecha</th>
                             <th>Estado</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody class="contenidobusqueda">
 						<tr>
 							<td>Título 1</td>
 							<td>Nota 1</td>
+                            <td>Categoria 1</td>
 							<td>Fecha 1</td>
 							<td>Estado 1</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" id="eliminar">
+                                    <span class="glyphicon glyphicon-remove-sign"></span>
+                                </button>
+                            </td>
 						</tr>
                     </tbody>
                 </table>
@@ -74,18 +90,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div id="agregar" class="collapse">
                     <form action="index.php" class="form" id="formulario" method="POST" target="_self" autocomplete="on">
                         <div class="row">
-                            <div class="col">
+                            <div class="col-6">
                                 <label for="titulo" class="form-label">Titulo</label>
-                                <input type="text" class="form-control" name="titulo" id="titulo"  data-bs-toggle="mensaje" title="coloca un titulo corto con eso te sera mas facil buscar la nota despues">
+                                <input type="text" class="form-control" name="titulo" id="titulo" required data-bs-toggle="mensaje" title="coloca un titulo corto con eso te sera mas facil buscar la nota despues">
                             </div>
-                            <div class="col">
+                            <div class="col-3">
+                                <label for="categoria" class="form-label">categoria</label>
+                                <input type="text" class="form-control" name="categoria" id="categoria" required data-bs-toggle="mensaje" title="aca escribe una categoria como trabajo o estudio">
+                            </div>
+                            <div class="col-3">
                                 <label for="date" class="form-label">Fecha</label>
-                                <input type="date" class="form-control" name="fecha" id="fecha">
+                                <input type="date" class="form-control" name="fecha" id="fecha" required>
                             </div>
                         </div>
 
                         <label for="Nota" class="form-label">Nota</label>
-                        <textarea name="nota" class="form-control" id="nota" rows="5"></textarea>
+                        <textarea name="nota" class="form-control" id="nota" rows="5" required></textarea>
                         
                         <button type="submit" class="btn btn-outline-primary">Guardar</button>
                     </form>
@@ -147,7 +167,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         })
 
-});
+        });
+
+        //funcion eliminar fila o tarea
+        let boteliminar = document.getElementById("eliminar");
+
+        boteliminar.addEventListener("click", () =>{
+            alert("se elimino la tarea")
+            event.target.parentNode.parentNode.remove()
+        });
+
+
     </script>
 </body>
 </html>
