@@ -100,10 +100,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <script>
         //funcion tooltip para mostrar el mensaje con el cursor
-        var = tooltiipTrigerList =[].slice.call(document.queryselector('[data-bs-toggle="mensaje"]'));
-        var = tooltiplist = tooltiipTrigerList.map (function(tooltiipTrigerEl){
-            return new bootstrap.Tooltip(tooltiipTrigerEl)
-        });
+        //var = tooltiipTrigerList =[].slice.call(document.queryselector('[data-bs-toggle="mensaje"]'));
+        //var = tooltiplist = tooltiipTrigerList.map (function(tooltiipTrigerEl){
+          //  return new bootstrap.Tooltip(tooltiipTrigerEl)
+        //});
 
 		$(document).ready(() => {
 			console.log('Se cargo el archivo');
