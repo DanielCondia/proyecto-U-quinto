@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <th>Categoria</th>
                             <th>Fecha</th>
                             <th>Estado</th>
-                            <th></th>
+                            <th>Eliminar</th>
                         </tr>
                     </thead>
                     <tbody class="contenidobusqueda">
@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 							<td>Fecha 1</td>
 							<td>Estado 1</td>
                             <td>
-                                <button type="button" class="btn btn-primary" id="eliminar">
+                                <button type="button" class="btn btn-close" id="eliminar">
                                     <span class="glyphicon glyphicon-remove-sign"></span>
                                 </button>
                             </td>
