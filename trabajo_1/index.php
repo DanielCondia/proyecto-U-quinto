@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			</label>
 		</td>
         <td>
-            <button type='button' class='btn btn-primary' id='eliminar'>Eliminar
+            <button type='button' class='btn btn-close' id='eliminar' onclick='eliminarTarea()'>
                 <span class='glyphicon glyphicon-remove-sign'></span
             </button>
         </td>
@@ -75,17 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </tr>
                 </thead>
                 <tbody class="contenidobusqueda">
-                <tr>
-                    <td>Título 1</td>
-                    <td>Nota 1</td>
-                    <td>Categoria 1</td>
-                    <td>Fecha 1</td>
-                    <td>Estado 1</td>
-                    <td>
-                        <button type="button" class="btn btn-close" id="eliminar">
-                            <span class="glyphicon glyphicon-remove-sign"></span>
-                    </td>
-                </tr>
+                <tr></tr>
                 </tbody>
             </table>
             <a href="#agregar" data-bs-toggle="collapse" class="btn btn-outline-primary" data-bs-toggle="mensaje"
@@ -129,16 +119,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 <script>
-    //funcion tooltip para mostrar el mensaje con el cursor
-    //var = tooltiipTrigerList =[].slice.call(document.queryselector('[data-bs-toggle="mensaje"]'));
-    //var = tooltiplist = tooltiipTrigerList.map (function(tooltiipTrigerEl){
-    //  return new bootstrap.Tooltip(tooltiipTrigerEl)
-    //});
 
     $(document).ready(() => {
-
-        //funcion para filtrar datos
-
+        /**
+         * función para filtrar datos
+         */
         $('#entradafilter').keyup(function () {
             var rex = new RegExp($(this).val(), 'i');
             $('.contenidobusqueda tr').hide();
@@ -147,13 +132,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }).show();
         })
 
-        console.log('Se cargo el archivo');
         $("#formulario").on("submit", function (event) {
             // Evita que la pagina se recargue automáticamente
             event.preventDefault();
-
-            console.log('entro en submit');
-
             $.ajax({
                 url: 'index.php',
                 type: 'POST',
@@ -161,32 +142,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 success: function (response) {
                     // Agrega la nieva fila a la tabla
                     $("table tbody").append(response);
-
                     // Limpia el formulario
                     $("#formulario")[0].reset();
                 },
-                error: function (xhr, status, error) {
+                error: function (xhr, status, error) {  // en caso de error
                     console.log("Ocurrio un error => " + error);
                 }
             });
         });
+
+        const ini = document.getElementById("inicio");
+        ini.addEventListener('click', () => {
+            window.location.href = "inicio.php"
+        })
     });
 
-    const ini = document.getElementById("inicio");
-    ini.addEventListener('click', () => {
-        window.location.href = "inicio.php"
-    })
-
-
-    //funcion eliminar fila o tarea
-    let boteliminar = document.getElementById("eliminar");
-
-    boteliminar.addEventListener("click", () => {
+    /**
+     * Función encargada de eliminar una tarea
+     */
+    function eliminarTarea() {
         alert("se elimino la tarea")
-        event.target.parentNode.parentNode.remove()
-    });
-
-
+        event.target.parentNode.parentNode.remove();
+    }
 </script>
 </body>
 </html>
