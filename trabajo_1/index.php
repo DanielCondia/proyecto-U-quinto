@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			</label>
 		</td>
         <td>
-            <button type='button' class='btn btn-primary' id='eliminar'>
+            <button type='button' class='btn btn-primary' id='eliminar'>Eliminar
                 <span class='glyphicon glyphicon-remove-sign'></span
             </button>
         </td>
@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 							<td>Estado 1</td>
                             <td>
                                 <button type="button" class="btn btn-primary" id="eliminar">
-                                    <span class="glyphicon glyphicon-remove-sign"></span>
+                                    <span class="glyphicon glyphicon-remove-sign">Eliminar</span>
                                 </button>
                             </td>
 						</tr>
@@ -126,6 +126,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         //});
 
 		$(document).ready(() => {
+
+            //funcion para filtrar datos
+
+            $('#entradafilter').keyup(function () {
+            var rex = new RegExp($(this).val(), 'i');
+            $('.contenidobusqueda tr').hide();
+            $('.contenidobusqueda tr').filter(function () {
+            return rex.test($(this).text());
+            }).show();
+            })
+
 			console.log('Se cargo el archivo');
 			$("#formulario").on("submit", function(event) {
 				// Evita que la pagina se recargue automáticamente
@@ -155,19 +166,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ini.addEventListener('click', () =>{
             window.location.href = "inicio.php"
         })
-
-        //funcion para filtrar datos 
-        $(document).ready(function () {
-        $('#entradafilter').keyup(function () {
-        var rex = new RegExp($(this).val(), 'i');
-        $('.contenidobusqueda tr').hide();
-        $('.contenidobusqueda tr').filter(function () {
-            return rex.test($(this).text());
-        }).show();
-
-        })
-
-        });
+ 
 
         //funcion eliminar fila o tarea
         let boteliminar = document.getElementById("eliminar");
